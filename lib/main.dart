@@ -1,23 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:localtion_app/pages/home_page.dart';
+import 'package:localtion_app/core/providers_list/providers_list.dart';
+import 'package:localtion_app/pages/places_form_page.dart';
+import 'package:localtion_app/pages/places_list_page.dart';
+import 'package:provider/provider.dart';
+
+import 'core/routes/app_routes.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final list = ProvidersList();
 
-  // This widget is the root of your application.
+  MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.red,
+    return MultiProvider(
+      providers: list.providers,
+      child: MaterialApp(
+        title: 'Great Places',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSwatch(
+            accentColor: Colors.amber,
+            primarySwatch: Colors.indigo,
+          ),
+        ),
+        home: const PlacesListPage(),
+        routes: {
+          AppRoutes.placeListPage: (context) => const PlacesListPage(),
+          AppRoutes.placeFormPage: (context) => const PlacesFormPage(),
+        },
+        debugShowCheckedModeBanner: false,
       ),
-      home: const HomePage(),
-      debugShowCheckedModeBanner: false,
     );
   }
 }
