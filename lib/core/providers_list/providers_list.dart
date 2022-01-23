@@ -13,7 +13,7 @@ class ProvidersList {
       create: (_) => PlaceFormProvider(),
     ),
     ChangeNotifierProvider(
-      create: (_) => GratePlaceProvider(),
+      create: (_) => GreatPlaceProvider(),
     ),
   ];
 }

@@ -34,6 +34,8 @@ dependencies:
   http: ^0.13.4
   image_picker: ^0.8.4+4
   sqlite3: ^1.5.1
+  path_provider: ^2.0.8
+  path: ^1.8.0
 
 
   # The following adds the Cupertino Icons font to your application.

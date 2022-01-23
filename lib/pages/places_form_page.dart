@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:localtion_app/providers/grate_places_provider.dart';
 import 'package:localtion_app/widgets/app_bar_widget.dart';
 import 'package:localtion_app/widgets/form/text_form_component.dart';
 import 'package:localtion_app/widgets/image_input.dart';
+import 'package:provider/provider.dart';
 
 class PlacesFormPage extends StatefulWidget {
   const PlacesFormPage({Key? key}) : super(key: key);
@@ -12,8 +16,27 @@ class PlacesFormPage extends StatefulWidget {
 
 class _PlacesFormPageState extends State<PlacesFormPage> {
   final _titleController = TextEditingController();
+  File? _pickedImage;
 
-  void _submitForm() {}
+  void _selectImage(File pickedImage) {
+    _pickedImage = pickedImage;
+  }
+
+  void _submitForm() {
+    if (_titleController.text.isEmpty || _pickedImage == null) {
+      return;
+    }
+
+    Provider.of<GreatPlaceProvider>(
+      context,
+      listen: false,
+    ).addPlace(
+      _titleController.text,
+      _pickedImage!,
+    );
+
+    Navigator.of(context).pop();
+  }
 
   @override
   void dispose() {
@@ -55,7 +78,9 @@ class _PlacesFormPageState extends State<PlacesFormPage> {
             controller: _titleController,
           ),
           const SizedBox(height: 15),
-          const ImageInput(),
+          ImageInput(
+            onSelectImage: _selectImage,
+          ),
         ],
       ),
     );
