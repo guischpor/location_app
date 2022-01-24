@@ -1,10 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:localtion_app/providers/grate_places_provider.dart';
+import 'package:localtion_app/providers/great_places_provider.dart';
 import 'package:localtion_app/widgets/app_bar_widget.dart';
 import 'package:localtion_app/widgets/form/text_form_component.dart';
 import 'package:localtion_app/widgets/image_input.dart';
+import 'package:localtion_app/widgets/location_input.dart';
 import 'package:provider/provider.dart';
 
 class PlacesFormPage extends StatefulWidget {
@@ -81,6 +82,8 @@ class _PlacesFormPageState extends State<PlacesFormPage> {
           ImageInput(
             onSelectImage: _selectImage,
           ),
+          const SizedBox(height: 15),
+          const LocationInput(),
         ],
       ),
     );

@@ -20,7 +20,7 @@ class _ImageInputState extends State<ImageInput> {
     bool? gallery = false,
     bool? photo = false,
   }) async {
-    if (photo == true) {
+    // if (photo == true) {
       final _picker = ImagePicker();
       XFile imageFile = await _picker.pickImage(
         source: ImageSource.camera,
@@ -32,21 +32,21 @@ class _ImageInputState extends State<ImageInput> {
       setState(() {
         _storedImage = File(imageFile.path);
       });
-    }
+    // }
 
-    if (gallery == true) {
-      final _picker = ImagePicker();
-      XFile imageFile = await _picker.pickImage(
-        source: ImageSource.gallery,
-        maxWidth: 600,
-      ) as XFile;
+    // if (gallery == true) {
+    //   final _picker = ImagePicker();
+    //   XFile imageFile = await _picker.pickImage(
+    //     source: ImageSource.gallery,
+    //     maxWidth: 600,
+    //   ) as XFile;
 
-      if (imageFile == null) return;
+    //   if (imageFile == null) return;
 
-      setState(() {
-        _storedImage = File(imageFile.path);
-      });
-    }
+    //   setState(() {
+    //     _storedImage = File(imageFile.path);
+    //   });
+    // }
 
     //pega o diretorio que vamos guardar a imagem
     final appDir = await syspaths.getApplicationDocumentsDirectory();
@@ -69,13 +69,13 @@ class _ImageInputState extends State<ImageInput> {
         Container(
           width: 180,
           height: 100,
+          alignment: Alignment.center,
           decoration: BoxDecoration(
             border: Border.all(
               width: 1,
               color: Colors.grey,
             ),
           ),
-          alignment: Alignment.center,
           child: _storedImage != null
               ? Image.file(
                   _storedImage!,
@@ -94,14 +94,14 @@ class _ImageInputState extends State<ImageInput> {
               TextButton.icon(
                 icon: const Icon(Icons.camera),
                 label: const Text('Tirar Foto'),
-                onPressed: () => _takePicture(photo: true),
+                onPressed: () => _takePicture(),
               ),
               // const SizedBox(width: 10),
-              TextButton.icon(
-                icon: const Icon(Icons.sd_storage_rounded),
-                label: const Text('Selecionar Imagem'),
-                onPressed: () => _takePicture(gallery: true),
-              ),
+              // TextButton.icon(
+              //   icon: const Icon(Icons.sd_storage_rounded),
+              //   label: const Text('Selecionar Imagem'),
+              //   onPressed: () => _takePicture(gallery: true),
+              // ),
             ],
           ),
         )
