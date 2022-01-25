@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:localtion_app/core/utils/location_utils.dart';
-import 'package:localtion_app/widgets/app_bar_widget.dart';
 import 'package:location/location.dart';
 
 class LocationInput extends StatefulWidget {
