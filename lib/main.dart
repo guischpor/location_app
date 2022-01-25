@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:localtion_app/core/providers_list/providers_list.dart';
+import 'package:localtion_app/pages/map_page.dart';
+import 'package:localtion_app/pages/place_detail_page.dart';
 import 'package:localtion_app/pages/places_form_page.dart';
 import 'package:localtion_app/pages/places_list_page.dart';
 import 'package:provider/provider.dart';
@@ -31,6 +33,7 @@ class MyApp extends StatelessWidget {
         routes: {
           AppRoutes.placeListPage: (context) => const PlacesListPage(),
           AppRoutes.placeFormPage: (context) => const PlacesFormPage(),
+          AppRoutes.placeDetailPage: (context) => const PlaceDetailPage(),
         },
         debugShowCheckedModeBanner: false,
       ),

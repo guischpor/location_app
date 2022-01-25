@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:localtion_app/providers/great_places_provider.dart';
 import 'package:localtion_app/widgets/app_bar_widget.dart';
 import 'package:localtion_app/widgets/form/text_form_component.dart';
@@ -18,15 +19,28 @@ class PlacesFormPage extends StatefulWidget {
 class _PlacesFormPageState extends State<PlacesFormPage> {
   final _titleController = TextEditingController();
   File? _pickedImage;
+  LatLng? _pickedPosition;
 
   void _selectImage(File pickedImage) {
-    _pickedImage = pickedImage;
+    setState(() {
+      _pickedImage = pickedImage;
+    });
+  }
+
+  void _selectPosition(LatLng position) {
+    setState(() {
+      _pickedPosition = position;
+    });
+  }
+
+  bool _isValidForm() {
+    return _titleController.text.isNotEmpty &&
+        _pickedImage != null &&
+        _pickedPosition != null;
   }
 
   void _submitForm() {
-    if (_titleController.text.isEmpty || _pickedImage == null) {
-      return;
-    }
+    if (!_isValidForm()) return;
 
     Provider.of<GreatPlaceProvider>(
       context,
@@ -34,6 +48,7 @@ class _PlacesFormPageState extends State<PlacesFormPage> {
     ).addPlace(
       _titleController.text,
       _pickedImage!,
+      _pickedPosition!,
     );
 
     Navigator.of(context).pop();
@@ -54,7 +69,8 @@ class _PlacesFormPageState extends State<PlacesFormPage> {
       ),
       body: _body(context),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => _submitForm(),
+        onPressed: _isValidForm() ? _submitForm : null,
+        backgroundColor: _isValidForm() ? Colors.amber : Colors.grey,
         child: const Icon(Icons.save),
       ),
     );
@@ -77,13 +93,18 @@ class _PlacesFormPageState extends State<PlacesFormPage> {
             labelText: 'Título',
             keyboardType: TextInputType.name,
             controller: _titleController,
+            onChanged: (text) {
+              setState(() {});
+            },
           ),
           const SizedBox(height: 15),
           ImageInput(
             onSelectImage: _selectImage,
           ),
           const SizedBox(height: 15),
-          const LocationInput(),
+          LocationInput(
+            onSelectPosition: _selectPosition,
+          ),
         ],
       ),
     );

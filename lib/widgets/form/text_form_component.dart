@@ -14,6 +14,7 @@ class TextFormComponent extends StatelessWidget {
   final String? Function(String?)? validator;
   final String? initialValue;
   final bool obscureText;
+  final void Function(String)? onChanged;
 
   const TextFormComponent({
     Key? key,
@@ -29,6 +30,7 @@ class TextFormComponent extends StatelessWidget {
     this.validator,
     this.initialValue,
     this.obscureText = false,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -48,6 +50,7 @@ class TextFormComponent extends StatelessWidget {
       onSaved: onSaved,
       validator: validator,
       obscureText: obscureText,
+      onChanged: onChanged,
     );
   }
 }

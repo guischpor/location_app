@@ -12,7 +12,7 @@ class DbPlaces {
       path.join(dbPath, 'places.db'),
       onCreate: (db, version) {
         return db.execute(
-          'CREATE TABLE places (id TEXT PRIMARY KEY, title TEXT, image TEXT)',
+          'CREATE TABLE places (id TEXT PRIMARY KEY, title TEXT, image TEXT, latitude REAL, longitude REAL, address TEXT)',
         );
       },
       version: 1,
